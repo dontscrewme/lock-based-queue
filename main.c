@@ -94,8 +94,12 @@ int isolated_enqueue_test(unsigned num_producers, unsigned long total_items)
             .lock = PTHREAD_MUTEX_INITIALIZER,
             .start_cond = PTHREAD_COND_INITIALIZER,
             .total_items_produced = ATOMIC_VAR_INIT(0),
-            .start_flag = 0},
-        .queue = {{0}},
+            .start_flag = 0
+        },
+        .queue = {
+            .queue = {0},
+            .mutex = PTHREAD_MUTEX_INITIALIZER
+        },
         .total_items = total_items,
     };
 
@@ -151,8 +155,12 @@ int isolated_dequeue_test(unsigned num_consumers, unsigned long total_items)
                  .start_cond = PTHREAD_COND_INITIALIZER,
                  .start_flag = 0,
                  .total_items_produced = ATOMIC_VAR_INIT(0),
-                 .total_items_consumed = ATOMIC_VAR_INIT(0)},
-        .queue = {{0}},
+                 .total_items_consumed = ATOMIC_VAR_INIT(0)
+        },
+        .queue = {
+            .queue = {0},
+            .mutex = PTHREAD_MUTEX_INITIALIZER
+        },
         .total_items = total_items,
     };
 
@@ -239,8 +247,12 @@ int integrated_test(unsigned num_producers, unsigned num_consumers, unsigned lon
                  .start_cond = PTHREAD_COND_INITIALIZER,
                  .start_flag = 0,
                  .total_items_produced = ATOMIC_VAR_INIT(0),
-                 .total_items_consumed = ATOMIC_VAR_INIT(0)},
-        .queue = {{0}},
+                 .total_items_consumed = ATOMIC_VAR_INIT(0)
+        },
+        .queue = {
+            .queue = {0},
+            .mutex = PTHREAD_MUTEX_INITIALIZER
+        },
         .total_items = total_items,
     };
 
